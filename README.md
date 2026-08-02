@@ -24,6 +24,7 @@ Station 562 badge.
 - [Quick Start](docs/user/STATION562_QUICK_START.md)
 - [Advanced Owner Guide](docs/user/STATION562_ADVANCED_OWNER_GUIDE.md)
 - [Terminal and BLE Reference](docs/user/STATION562_TERMINAL_AND_BLE_REFERENCE.md)
+- [Troubleshooting FAQ](docs/user/STATION562_TROUBLESHOOTING.md)
 - [Hardware Pinout](docs/HARDWARE_PINOUT.md)
 - [Self-Flash Guide](docs/SELF_FLASH_GUIDE.md)
 - [Hardware CTF Player Guide](docs/ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md)

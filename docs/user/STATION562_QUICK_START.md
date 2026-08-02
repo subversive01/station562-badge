@@ -327,3 +327,5 @@ For complete Signal Clash mechanics, MIDI configuration, BLE services, terminal
 access, persistence, and recovery, continue with the
 [Advanced Owner Guide](STATION562_ADVANCED_OWNER_GUIDE.md) and
 [Terminal And BLE Command Reference](STATION562_TERMINAL_AND_BLE_REFERENCE.md).
+For symptom-first help, use the
+[Troubleshooting FAQ](STATION562_TROUBLESHOOTING.md).

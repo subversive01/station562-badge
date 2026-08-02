@@ -1459,6 +1459,8 @@ A failed or timed-out attempt does not exit the mode. Start again from the
 - Quick start: `docs/user/STATION562_QUICK_START.md`
 - Terminal and BLE reference:
   `docs/user/STATION562_TERMINAL_AND_BLE_REFERENCE.md`
+- Troubleshooting FAQ:
+  `docs/user/STATION562_TROUBLESHOOTING.md`
 - Self-flash guide: `docs/SELF_FLASH_GUIDE.md`
 - Hardware CTF player guide:
   `docs/ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md`

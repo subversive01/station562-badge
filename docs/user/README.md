@@ -8,6 +8,9 @@
 - [Terminal And BLE Command Reference](STATION562_TERMINAL_AND_BLE_REFERENCE.md):
   USB connection steps, complete production command catalog, Config GATT
   envelopes, access control, and exact SIGNAL event commands.
+- [Troubleshooting FAQ](STATION562_TROUBLESHOOTING.md): symptom-first recovery
+  for power, gestures, mode exits, BLE, MIDI, multiplayer discovery, and
+  flashing.
 - [Hardware Pinout](../HARDWARE_PINOUT.md): OLED, sensor, and LED GPIO/address
   summary for CodeCell ESP32-C3 and XIAO ESP32-C6.
 - [Hardware CTF Player Guide](../ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md):
