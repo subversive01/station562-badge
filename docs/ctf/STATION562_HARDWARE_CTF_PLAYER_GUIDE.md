@@ -1,3 +1,4 @@
+````markdown
 # Station 562 Hardware CTF
 
 Release: Station 562 `V6.3.0`.
@@ -14,6 +15,29 @@ TUNE IT TO THE NUMBER IT WEARS.
 
 Six challenges are hidden inside the badge. AI-assisted play is allowed, but
 the badge and the player's own observations remain part of the game.
+
+## MMO Rewards
+
+The Station 562 badge is connected to the MMO.
+
+In the game, find the NPC named `n+1` at the house party in Act 3—if you can
+make it that far. His in-game digital badge grants access to the party and
+mirrors the real Station 562 badge.
+
+The badge firmware contains several CTF challenges. Solving them may reveal
+codewords that can be redeemed for in-game rewards.
+
+To redeem a reward:
+
+1. Recover a codeword by solving one of the badge's CTF challenges.
+2. Find `n+1` at the house party in Act 3.
+3. Give the recovered codeword to `n+1`.
+4. Receive the associated loot.
+
+Rewards may include equipment, cards, and other items that make your character
+stronger in the MMO.
+
+Record each codeword exactly as it appears. Codewords may be case-sensitive.
 
 ## Safety Contract
 
@@ -61,3 +85,5 @@ Here is what I currently have:
 ```
 
 Do not give an AI unrecovered flags or material from later challenges.
+````
+
