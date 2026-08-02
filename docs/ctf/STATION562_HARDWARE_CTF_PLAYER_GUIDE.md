@@ -17,14 +17,11 @@ the badge and the player's own observations remain part of the game.
 
 ## MMO Rewards
 
-The Station 562 badge is connected to the MMO.
+The Station 562 badge is connected to the DC562 DEF CON MMO: mmo.lockboxx.org.
 
-In the game, find the NPC named `n+1` at the house party in Act 3—if you can
+In the game, find the NPC named `n+1` at the house party in Act 3, if you can
 make it that far. His in-game digital badge grants access to the party and
 mirrors the real Station 562 badge.
-
-The badge firmware contains several CTF challenges. Solving them may reveal
-codewords that can be redeemed for in-game rewards.
 
 To redeem a reward:
 
@@ -34,9 +31,7 @@ To redeem a reward:
 4. Receive the associated loot.
 
 Rewards may include equipment, cards, and other items that make your character
-stronger in the MMO.
-
-Record each codeword exactly as it appears. Codewords may be case-sensitive.
+stronger in the MMO. Record each codeword exactly as it appears. Codewords may be case-sensitive.
 
 ## Safety Contract
 
