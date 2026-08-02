@@ -12,9 +12,8 @@ ASK WHAT THE STATION CAN DO.
 TUNE IT TO THE NUMBER IT WEARS.
 ```
 
-Six transmissions are hidden inside the badge. The trail begins with ordinary
-USB serial discovery. Every solved gate unlocks only the files and instructions
-needed for the next gate.
+Six transmissions are hidden inside the badge. Every solved gate unlocks only
+the files and instructions needed for the next gate.
 
 The CTF welcomes AI-assisted play. Ask an AI to explain tools, command options,
 binary formats, or an error message, but give it only the clue and files you
@@ -26,8 +25,8 @@ The intended path is read-only.
 
 Allowed:
 
-- USB serial commands;
-- `esptool read-flash`;
+- read-only actions requested by the current recovered transmission;
+- read-only copies of badge flash and files;
 - offline inspection of copied files;
 - one read-only BLE connection-state check when a recovered instruction
   requests it;
@@ -45,89 +44,27 @@ Never use:
 
 If a command contains `erase`, `write`, `burn`, or `fuse`, stop.
 
-## Initial Tools
+## Compatibility
 
-You need:
+You need one Station 562 badge, a USB data cable, and a computer capable of
+running Python 3 and standard ESP32/BLE utilities. Linux, macOS, and Windows are
+supported; no stage requires a macOS-only tool.
 
-- one Station 562 badge and a USB data cable;
-- Python 3;
-- a serial terminal;
-- Espressif `esptool`;
-- nRF Connect or another BLE client for the later live-link stage.
-
-Create a working directory and Python environment:
-
-```bash
-mkdir station562-ctf
-cd station562-ctf
-python3 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install esptool pyserial
-```
-
-On Windows PowerShell, activate with
-`.venv\Scripts\Activate.ps1` and use `py -3` instead of `python3` if needed.
-
-Later stages may identify another standard tool or dependency. Install it only
-when the current recovered instructions request it. Every custom Station 562
-validator is recovered from the badge during play.
-
-## Find The Badge
-
-List likely USB ports:
-
-```bash
-# macOS
-ls /dev/cu.usbmodem*
-
-# Linux
-ls /dev/ttyACM* /dev/ttyUSB*
-
-# Windows PowerShell
-[System.IO.Ports.SerialPort]::GetPortNames()
-```
-
-If several ports appear, compare the list before and after reconnecting the
-badge. The new port is normally the badge.
-
-Open a cross-platform terminal at 115200 baud:
-
-```bash
-python3 -m serial.tools.miniterm PORT 115200
-```
-
-Press Enter, type `help`, and read the full command list. Exit miniterm with
-`Ctrl+]`.
-
-The opening transmission tells you what kind of command to look for and what
-value belongs in it. When the badge opens a physical signal window, follow its
-OLED and terminal prompts. The interaction is deliberately forgiving and may
-be retried without penalty.
+Install a tool or dependency only when a recovered transmission requests it.
+Every custom Station 562 validator is recovered from the badge during play.
+When the badge opens a physical signal window, follow its OLED prompts. The
+interaction is deliberately forgiving and may be retried without penalty.
 
 ## Follow One Transmission At A Time
 
 Use only the newest material you have legitimately recovered:
 
-1. Read the current terminal output completely.
+1. Read the current clue or output completely.
 2. Open the exact file or path named by the newest recovered instruction.
 3. Run a tool with `--help` before using it if any argument is unclear.
 4. Preserve complete output and evidence files until the chain is finished.
 
 Recovered tools operate on local copies and do not write back to the badge.
-
-## USB Port Conflicts
-
-Only one program can normally own the serial port. Close the serial terminal
-before using `esptool`. Reopen the terminal after `esptool` finishes and the
-badge reboots.
-
-If a port is busy on macOS or Linux:
-
-```bash
-lsof PORT
-```
-
-Close only the process that owns that badge port.
 
 ## Ask For Help Without Skipping The Game
 

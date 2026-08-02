@@ -291,9 +291,8 @@ may have reappeared under another.
 
 ## Optional Hardware CTF
 
-The badge also contains a six-stage, read-only hardware CTF. The event opening
-statement leads players to the USB terminal and the first transmission. The
-safe starting guide is
+The badge also contains a six-stage, read-only hardware CTF. Begin with the
+opening transmission in the
 [Station 562 Hardware CTF Player Guide](../ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md).
 
 The CTF never requires erasing or writing player flash. Do not run destructive

@@ -77,9 +77,9 @@ settings, keypair, and ROOT certificate.
 The complete signed six-stage hardware CTF is included in the release image.
 Flashing through this repository installs it automatically.
 
-The public documentation explains safe play and how to begin. It does not
-publish answers or skip the chain. Every later custom tool and instruction is
-recovered from the badge only after the preceding gate is solved.
+The player guide provides safety rules and non-spoiler preparation. Every later
+custom tool and instruction is recovered from the badge only after the
+preceding gate is solved.
 
 Start with the [Hardware CTF Player Guide](docs/ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md).
 
