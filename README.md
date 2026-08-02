@@ -32,6 +32,7 @@ manufacturing material.
 - [Quick Start](docs/user/STATION562_QUICK_START.md)
 - [Advanced Owner Guide](docs/user/STATION562_ADVANCED_OWNER_GUIDE.md)
 - [Terminal and BLE Reference](docs/user/STATION562_TERMINAL_AND_BLE_REFERENCE.md)
+- [Hardware Pinout](docs/HARDWARE_PINOUT.md)
 - [Self-Flash Guide](docs/SELF_FLASH_GUIDE.md)
 - [Hardware CTF Player Guide](docs/ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md)
 - [AI-Assisted CTF Play](docs/ctf/STATION562_HARDWARE_CTF_AI_PLAY.md)
@@ -47,6 +48,11 @@ The updater detects the ESP32 family and selects the correct build:
 | Seeed Studio XIAO | ESP32-C6 | XIAO V6.3.0 update bundle |
 
 Never manually swap the two update bundles.
+
+The [Hardware Pinout](docs/HARDWARE_PINOUT.md) is also included for owners who
+want to write independent firmware and repurpose the badge for another project.
+Custom firmware is separate from the supported Station 562 release and should
+be developed with care around the existing flash layout and 3.3 V hardware.
 
 ## Flash V6.3.0
 

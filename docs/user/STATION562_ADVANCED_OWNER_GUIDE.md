@@ -64,6 +64,9 @@ The user-facing hold times, mode order, OLED flow, BLE contracts, MIDI features,
 and saved-setting behavior are intended to match across both targets. Sensor
 ranges and LED rendering differ because the hardware differs.
 
+See the [Hardware Pinout](../HARDWARE_PINOUT.md) for the exact production GPIO,
+I2C address, and LED-channel assignments.
+
 ## 3. Sensor Language
 
 Station 562 has no conventional menu button. The hand sensor is the control.

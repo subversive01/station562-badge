@@ -8,6 +8,8 @@
 - [Terminal And BLE Command Reference](STATION562_TERMINAL_AND_BLE_REFERENCE.md):
   USB connection steps, complete production command catalog, Config GATT
   envelopes, access control, and exact SIGNAL event commands.
+- [Hardware Pinout](../HARDWARE_PINOUT.md): OLED, sensor, and LED GPIO/address
+  summary for CodeCell ESP32-C3 and XIAO ESP32-C6.
 - [Hardware CTF Player Guide](../ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md):
   safe starting instructions for the optional six-stage challenge.
 - [Self-Flash Guide](../SELF_FLASH_GUIDE.md): safe V6.3.0 owner updates that
