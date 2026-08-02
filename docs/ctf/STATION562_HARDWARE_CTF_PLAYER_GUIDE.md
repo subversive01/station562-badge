@@ -1,4 +1,3 @@
-````markdown
 # Station 562 Hardware CTF
 
 Release: Station 562 `V6.3.0`.
@@ -85,5 +84,3 @@ Here is what I currently have:
 ```
 
 Do not give an AI unrecovered flags or material from later challenges.
-````
-
