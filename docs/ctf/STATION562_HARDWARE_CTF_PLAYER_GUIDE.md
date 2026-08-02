@@ -12,25 +12,13 @@ ASK WHAT THE STATION CAN DO.
 TUNE IT TO THE NUMBER IT WEARS.
 ```
 
-Six transmissions are hidden inside the badge. Every solved gate unlocks only
-the files and instructions needed for the next gate.
-
-The CTF welcomes AI-assisted play. Ask an AI to explain tools, command options,
-binary formats, or an error message, but give it only the clue and files you
-have actually unlocked. Real badge evidence is still required.
+Six challenges are hidden inside the badge. AI-assisted play is allowed, but
+the badge and the player's own observations remain part of the game.
 
 ## Safety Contract
 
-The intended path is read-only.
-
-Allowed:
-
-- read-only actions requested by the current recovered transmission;
-- read-only copies of badge flash and files;
-- offline inspection of copied files;
-- one read-only BLE connection-state check when a recovered instruction
-  requests it;
-- read-only Station 562 validators recovered from the badge.
+The intended path is read-only. Inspecting information copied from your own
+badge is safe; altering the badge is not part of the CTF.
 
 Never use:
 
@@ -44,41 +32,32 @@ Never use:
 
 If a command contains `erase`, `write`, `burn`, or `fuse`, stop.
 
-## Compatibility
+## General Requirements
 
-You need one Station 562 badge, a USB data cable, and a computer capable of
-running Python 3 and standard ESP32/BLE utilities. Linux, macOS, and Windows are
-supported; no stage requires a macOS-only tool.
+You need:
 
-Install a tool or dependency only when a recovered transmission requests it.
-Every custom Station 562 validator is recovered from the badge during play.
-When the badge opens a physical signal window, follow its OLED prompts. The
-interaction is deliberately forgiving and may be retried without penalty.
+- one Station 562 badge;
+- a USB data cable;
+- a Linux, macOS, or Windows computer;
+- Python 3;
+- standard ESP32 utilities;
+- a generic BLE client such as nRF Connect.
 
-## Follow One Transmission At A Time
+Any Station 562-specific material required by the CTF is supplied through the
+challenge itself.
 
-Use only the newest material you have legitimately recovered:
+## AI Assistance
 
-1. Read the current clue or output completely.
-2. Open the exact file or path named by the newest recovered instruction.
-3. Run a tool with `--help` before using it if any argument is unclear.
-4. Preserve complete output and evidence files until the chain is finished.
-
-Recovered tools operate on local copies and do not write back to the badge.
-
-## Ask For Help Without Skipping The Game
-
-A useful AI or help-desk request is:
+Give the AI only the clue, output, or file you currently have. A useful prompt
+is:
 
 ```text
-I am solving a read-only ESP32 hardware CTF.
-Explain this clue or command before I run it.
-Do not suggest erase-flash, write-flash, eFuse writes, factory reset,
-Burn Handle, or live NVS modification.
-Here is the latest material I have unlocked:
+I am solving a read-only hardware CTF.
+Help me understand this material without revealing later challenges.
+Never suggest destructive changes to the badge.
+
+Here is what I currently have:
 <paste it here>
 ```
 
-The challenge is the engineering path, not wrestling with undocumented file
-names or hidden command syntax. Each accepted stage supplies the operational
-details for the next one.
+Do not give an AI unrecovered flags or material from later challenges.

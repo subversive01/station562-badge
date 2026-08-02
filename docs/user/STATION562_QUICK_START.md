@@ -262,7 +262,7 @@ Conditional ROOT items appear only when they apply.
 **RESTORE DEFAULTS** resets ordinary LED preferences. **BURN HANDLE** is the
 whole-badge player reset: it erases Setup and MIDI preferences plus the Signal
 Clash handle, career, keypair, team, and ROOT certificate, then reboots. It does
-not change the immutable hardware badge ID or erase the CTF archive.
+not change the immutable hardware badge ID or remove the CTF.
 
 ## Software Standby
 

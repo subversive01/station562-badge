@@ -6,7 +6,7 @@ with the supplied updater.
 ## What The Normal Update Preserves
 
 The default updater writes one target-specific release bundle containing the
-official application and its matching CTF filesystem.
+official firmware and included CTF.
 
 It does not erase or write the NVS region that stores the owner handle, Signal
 Clash career, team, settings, keypair, or ROOT certificate.
@@ -168,6 +168,6 @@ the exact updater output and request support.
 
 ## CTF Safety
 
-The CTF is installed automatically. Playing it uses read-only flash operations.
-Do not confuse CTF exploration with this updater: never improvise writes,
-erases, eFuse changes, Burn Handle, or factory reset while solving it.
+The CTF is installed automatically and its intended path is read-only. Never
+improvise writes, erases, eFuse changes, Burn Handle, or factory reset while
+playing.

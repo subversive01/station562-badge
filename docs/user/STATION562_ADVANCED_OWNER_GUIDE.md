@@ -758,7 +758,7 @@ Reset commands have different scopes:
 | Setup `BURN HANDLE` or `factory-reset confirm` | Setup, MIDI, and Signal Clash namespaces, including career, player keypair, team, and ROOT certificate | Yes |
 
 Burn Handle preserves the hardware-derived stable badge ID because it comes
-from the physical ESP32. It also preserves the read-only CTF SPIFFS archive.
+from the physical ESP32. It also preserves the installed CTF.
 The next Signal Clash initialization creates a new player epoch, keypair,
 automatic handle, team, and PROSPECT career.
 
@@ -1276,7 +1276,7 @@ factory-reset confirm
 This is the USB equivalent of Setup **BURN HANDLE**. It clears Setup, MIDI, and
 Signal Clash NVS, including the handle, career, team, player keypair, and ROOT
 certificate, then schedules a reboot. It preserves the immutable hardware badge
-ID and CTF SPIFFS archive. It is immediate once the exact command is accepted;
+ID and installed CTF. It is immediate once the exact command is accepted;
 there is no second terminal prompt and it is never allowed over BLE.
 
 ## 17. Reading The MIDI Snapshot
@@ -1407,24 +1407,11 @@ save`, a scene save, or a user modifier save at the appropriate scope.
 
 ## 19. Optional Hardware CTF
 
-V6.3.0 contains a six-stage, read-only hardware-hacking challenge. Begin with
-the [Hardware CTF Player Guide](../ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md)
-and follow each recovered transmission in order.
+V6.3.0 contains an optional six-stage, read-only hardware-hacking challenge.
+The [Hardware CTF Player Guide](../ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md)
+lists general prerequisites and safety rules without explaining its challenges.
 
-The CTF is designed so:
-
-- one owner can complete it with one badge;
-- Python, standard ESP32 tools, and a generic BLE utility are sufficient;
-- no macOS-only tool is required;
-- every custom validator is recovered during legitimate play;
-- AI assistance is allowed, but physical sensor and BLE presence remain
-  necessary;
-- no stage requires writing or erasing badge flash.
-
-Do not guess destructive `esptool` commands. The player guide provides the
-required prerequisites and safety rules.
-
-Burn Handle does not erase the CTF archive. A full-chip erase does.
+Burn Handle does not remove the CTF.
 
 ## 20. Known V6.3.0 Limits
 
