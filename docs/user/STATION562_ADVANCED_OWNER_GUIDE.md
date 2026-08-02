@@ -44,7 +44,7 @@ DeFUNKd is casual and social; DEFUNKT562 is a protected tamper mode.
 
 ## 2. Hardware Variants
 
-The same production sketch supports two physical targets, but it compiles to a
+The same production sketch builds for two physical targets, but it compiles to a
 different binary for each target.
 
 | Feature | CodeCell ESP32-C3 | XIAO ESP32-C6 |
@@ -418,7 +418,7 @@ persona; Burn Handle is required to choose again.
 | BREAKER | Adds 6 percentage points to compromise probability |
 | GHOST | Approximately 6% automatic evade and Heat cools every 9 seconds |
 | CIPHER | Regenerates one missing PATCH after 90 seconds |
-| HANDLER | Nearby teammates gain +6 attack chance; confirmed supported captures award the Handler an assist and 4 REP |
+| HANDLER | Nearby teammates gain +6 attack chance; confirmed teammate-assisted captures award the Handler an assist and 4 REP |
 
 The OLED selection screen includes a short description. The USB command
 `wg disciplines` prints the complete reference.
@@ -1011,7 +1011,7 @@ or checking its `ok=`/`error=` response.
 
 Recognized read-only aliases are `status midi`, `clock midi`, `midi tune`,
 `status sleep`, and `status signal`. Use the primary forms above in scripts and
-support instructions so logs remain consistent.
+reference instructions so logs remain consistent.
 
 Before flashing a batch, run `version` on each connected badge. Compare the
 `firmware` field to the intended release and the `build_id` field to a known
@@ -1257,7 +1257,7 @@ persona; changing it requires **BURN HANDLE / FACTORY RESET**.
 | BREAKER | Adds 6 percentage points to compromise probability |
 | GHOST | Has approximately 6% automatic evade protection; Heat cools every 9 seconds instead of 15 |
 | CIPHER | Regenerates one roaming PATCH after 90 seconds without one |
-| HANDLER | Nearby teammates gain a 6-point attack bonus; a confirmed supported capture earns the Handler one assist and 4 REP |
+| HANDLER | Nearby teammates gain a 6-point attack bonus; a confirmed teammate-assisted capture earns the Handler one assist and 4 REP |
 
 USB reference commands:
 
@@ -1403,7 +1403,7 @@ save`, a scene save, or a user modifier save at the appropriate scope.
 - Put all three badges into their Setup roles before waiting for discovery.
 - Keep them close and powered for the full signed exchange.
 - Teams do not need to match.
-- Use `wg ceremony status` and `wg ceremony log` over USB if support is needed.
+- Use `wg ceremony status` and `wg ceremony log` over USB for troubleshooting.
 
 ## 19. Optional Hardware CTF
 
@@ -1453,7 +1453,7 @@ must recover a badge from DEFUNKT562 calibration, blackout, or alert.
 A failed or timed-out attempt does not exit the mode. Start again from the
 20-second hold.
 
-## 22. Firmware And Support References
+## 22. Firmware References
 
 - Current firmware: `V6.3.0`
 - Quick start: `docs/user/STATION562_QUICK_START.md`

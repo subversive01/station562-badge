@@ -123,9 +123,36 @@ Exit miniterm with `Ctrl+]`.
 ## Platform Recovery
 
 The public updater deliberately does not replace bootloader or partition-table
-data. If a badge cannot enter the ESP32 ROM loader or the normal update cannot
-recover it, stop and contact Station 562 support. Do not improvise a full-chip
-erase or mix platform files from another target.
+data. Use the hardware-specific ROM bootloader procedure below if the normal
+update cannot connect. Do not run a full-chip erase or mix files from another
+target.
+
+### XIAO ESP32-C6
+
+1. Disconnect USB and switch off or disconnect the battery.
+2. Press and hold **BOOT**.
+3. Reconnect the USB data cable while continuing to hold **BOOT**.
+4. Release **BOOT** after the computer detects the device.
+5. Run `python tools/flash_station562.py --list`, then flash the detected port.
+
+With USB already connected, the equivalent sequence is to hold **BOOT**, press
+and release **RESET**, then release **BOOT**.
+
+### CodeCell ESP32-C3
+
+CodeCell normally enters download mode automatically. If it is stuck in a
+reset loop or cannot be detected:
+
+1. Disconnect USB and switch off or disconnect the battery.
+2. With the badge unpowered, connect CodeCell **SCL** to **GND** with a jumper.
+   On CodeCell, SCL is ESP32-C3 GPIO9, the ROM boot strap pin.
+3. Reconnect USB while leaving the jumper in place.
+4. Run `python tools/flash_station562.py --list`, then flash the detected port.
+5. After the updater finishes, disconnect USB, remove the SCL-to-GND jumper,
+   and restore normal power.
+
+If the ESP32 ROM loader still does not appear after the applicable procedure,
+this updater cannot recover the badge.
 
 ## Dry Run
 
@@ -158,13 +185,15 @@ CodeCell and XIAO images.
 ### Interrupted Update
 
 Reconnect the badge and rerun the same command. If the updater can no longer
-identify the target through the ESP32 ROM loader, stop and request platform
-recovery support.
+identify the target through the ESP32 ROM loader, use **Platform Recovery**
+above. If the ROM loader remains unavailable, this updater cannot recover the
+badge.
 
 ### Identity Appears Missing
 
 Stop before issuing any reset command. The updater does not erase NVS. Record
-the exact updater output and request support.
+the exact updater output. Reflashing cannot reconstruct owner data that was
+previously erased.
 
 ## CTF Safety
 

@@ -1,6 +1,6 @@
 # Station 562 V6.3.0 Hardware Pinout
 
-This is the production firmware pin assignment for the two supported Station
+This is the production firmware pin assignment for the two Station
 562 targets. GPIO numbers are ESP32 GPIO numbers, not physical connector-pin
 numbers.
 
@@ -8,7 +8,7 @@ This reference is included so owners can write their own independent firmware
 and use the badge hardware for other projects. The GPIO and bus assignments
 below cover the OLED, sensor, and LEDs used by the badge.
 
-Custom firmware is outside the supported production release. A sketch with a
+Custom firmware is outside the official production release. A sketch with a
 different partition layout, whole-chip erase, factory reset, or NVS writes can
 remove the Station 562 handle, career, keypair, ROOT certificate, settings, or
 CTF. The public updater can reinstall the official firmware/CTF bundle, but it

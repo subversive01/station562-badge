@@ -30,7 +30,7 @@ Station 562 badge.
 - [AI-Assisted CTF Play](docs/ctf/STATION562_HARDWARE_CTF_AI_PLAY.md)
 - [V6.3.0 Release Notes](docs/firmware/V6.3.0_RELEASE_NOTES.md)
 
-## Supported Badges
+## Compatible Badges
 
 The updater detects the ESP32 family and selects the correct build:
 
@@ -43,7 +43,7 @@ Never manually swap the two update bundles.
 
 The [Hardware Pinout](docs/HARDWARE_PINOUT.md) is also included for owners who
 want to write independent firmware and repurpose the badge for another project.
-Custom firmware is separate from the supported Station 562 release and should
+Custom firmware is separate from the official Station 562 release and should
 be developed with care around the existing flash layout and 3.3 V hardware.
 
 ## Flash V6.3.0

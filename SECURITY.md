@@ -1,8 +1,5 @@
 # Security And Safety
 
-Report updater integrity problems privately to the Station 562 owner before
-publishing details.
-
 The updater must never:
 
 - invoke whole-chip erase;
