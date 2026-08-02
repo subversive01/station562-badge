@@ -1,0 +1,33 @@
+{
+  "schema": "station562.binary-release.v1",
+  "version": "V6.3.0",
+  "flash_size": "4MB",
+  "flash_mode": "dio",
+  "flash_frequency": "80m",
+  "preserved_nvs": {
+    "offset": "0x9000",
+    "size": "0x5000"
+  },
+  "targets": {
+    "codecell": {
+      "name": "CodeCell ESP32-C3",
+      "chip": "ESP32-C3",
+      "update": {
+        "offset": "0x10000",
+        "path": "firmware/v6.3.0/codecell/station562-v6.3.0-codecell-update.bin",
+        "size": 4063232,
+        "sha256": "3d1069d8d82cd5b670ef0365bf212832db94a24af1092e8eff2a4ea1cfa60703"
+      }
+    },
+    "xiao": {
+      "name": "Seeed Studio XIAO ESP32-C6",
+      "chip": "ESP32-C6",
+      "update": {
+        "offset": "0x10000",
+        "path": "firmware/v6.3.0/xiao/station562-v6.3.0-xiao-update.bin",
+        "size": 4063232,
+        "sha256": "7fc2f5db7cb560ffbe3789f769cd161b7c57936d0778f7d2706a920c539c0da7"
+      }
+    }
+  }
+}
