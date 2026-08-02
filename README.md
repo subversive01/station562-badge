@@ -12,7 +12,6 @@
 |========================================================|
 | CH ACTIVE      SIGNAL LOCKED      TX BURST       S562  |
 +--------------------------------------------------------+
-                    SIGNAL IS FOREVER
 ```
 
 Binary releases, owner documentation, and safe self-flashing tools for the
