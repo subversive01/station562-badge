@@ -1,8 +1,6 @@
 # Station 562 V6.3.0 Terminal And BLE Command Reference
 
-This is the production command reference for badge owners, musicians, and event
-operators. Puzzle and CTF discovery commands are intentionally left to the
-badge's own `help` output and recovered instructions.
+This is the production command reference for badge owners and musicians.
 
 Public display language says **Signal Clash**. USB commands retain `wargames`
 and `wg` for compatibility.
@@ -86,7 +84,7 @@ local log:
 3. press `Ctrl-A`, then `H` again to stop;
 4. find `screenlog.0` in the directory where `screen` was started.
 
-For any sensor diagnostic, preserve the complete BEGIN-to-END output block.
+For any sensor capture, preserve the complete BEGIN-to-END output block.
 
 ## Command Rules
 
@@ -279,14 +277,12 @@ expression gate repeat range chord motion velocity quantize glide phrase
 | --- | --- |
 | `wargames enter` / `wg enter` | Enter Signal Clash |
 | `wargames exit` / `wg exit` | Exit Signal Clash |
-| `wargames status` / `wg status` | Full runtime diagnostics |
+| `wargames status` / `wg status` | Current game, sensor, peer, and radio state |
 | `wargames stats` / `wg stats` | Full career and game counters |
 | `wargames peers` | Current peer/radio table |
-| `wargames attack` | Send an attack intent when terminal input is enabled |
-| `wargames join` | Accept a staged referee invitation |
 | `wargames team <auto|red|blue>` | Change team preference |
-| `wg act` | Context action: attack, defend, join, fork, or choose |
-| `wg input <sensor|terminal|auto>` | Select game input ownership |
+| `wg act` | Context action: attack, defend, fork, or choose |
+| `wg input <sensor|auto>` | Restore physical or automatic game input ownership |
 | `wg team <auto|red|blue>` | Team preference alias |
 | `wg whoami` | Identity, certificate, and key fingerprint |
 | `wg handle get` / `wargames handle get` | Read the current handle |
@@ -305,21 +301,18 @@ reserved system, team, rank, and protocol names are rejected.
 
 ### ROOT Ceremony Commands
 
-Normal ceremonies should be entered physically from Setup. USB diagnostics:
+Normal ceremonies are entered physically from Setup. The terminal provides
+status and recovery commands:
 
 | Command | Purpose |
 | --- | --- |
 | `wg ceremony status` | Current ceremony role and radio state |
 | `wg ceremony log` | Bounded ceremony trace |
 | `wg ceremony abort` | Abort the local role |
-| `wg ceremony enter <candidate|sponsor|witness>` | Developer diagnostic role entry |
-
-The `enter` form bypasses physical menu navigation and should not be used to
-claim a user-validated ceremony.
 
 ### Signal Clash Sensor Capture
 
-These read-only diagnostics capture and summarize VCNL4040 behavior:
+These read-only commands capture and summarize VCNL4040 behavior:
 
 | Command | Purpose |
 | --- | --- |
@@ -330,23 +323,6 @@ These read-only diagnostics capture and summarize VCNL4040 behavior:
 | `wargames sensor dump` | Complete CSV evidence from the last capture |
 | `wargames sensor cancel` | Cancel capture |
 
-## Developer/Operator Signal Clash Diagnostics
-
-These commands are compiled into production for event support but are not
-ordinary player actions:
-
-| Command | Purpose |
-| --- | --- |
-| `wg crypto benchmark` | USB cryptography timing diagnostic |
-| `wg venue status` | Venue-object state |
-| `wg venue dedicated <dead-drop|control-node [red|blue|none]|clear>` | Configure a dedicated object identity |
-| `wg venue virtual add <slot> <dead-drop|control-node> [red|blue|none]` | Add a volatile referee-hosted object |
-| `wg venue virtual clear` | Clear volatile objects |
-| `wg visual <list|target|incoming|firewall|evade|attack success|attack failed|defense success|defense failed|clear>` | Preview visual states |
-
-Developer builds may expose additional `wg fork` commands that are intentionally
-omitted from `help`. Do not use hidden diagnostics as player mechanics.
-
 ## DeFUNKd Autonomous-Mode Signal Party Commands
 
 | Command | Purpose |
@@ -354,36 +330,10 @@ omitted from `help`. Do not use hidden diagnostics as player mechanics.
 | `signal hacked` | Start the clock-bound invitation burst |
 | `signal restored` | Start the matching restoration burst |
 | `signal status` | Print clock, prompt, token, Party, and restoration state |
-| `signal prompt` | USB diagnostic: force the DeFUNKd prompt |
-| `signal enter` | USB diagnostic: force Party visuals |
-| `signal exit` | USB diagnostic: leave the visual overlay |
-| `signal animation-info on` | Show animation diagnostic text |
-| `signal animation-info off` | Hide diagnostic text |
-| `signal animation-info status` | Read diagnostic-overlay state |
 
 `signal hacked` and `signal restored` require active, running MIDI Clock on the
 MIDI conductor. Clock alone never triggers the prompt. Restoration must come
 from the same conductor token accepted by the follower.
-
-## Experimental Referee Commands
-
-These commands operate the archived/deferred best-of-three engine. They are
-available for controlled development but are not a V6.3.0 event promise.
-
-| Command | Purpose |
-| --- | --- |
-| `signal game arm` | Arm referee staging |
-| `signal game disarm` | Stop referee staging/match |
-| `signal game status` | Referee state |
-| `signal game stats` | Referee and career counters |
-| `signal game team <auto|red|blue>` | Referee/team preference |
-| `signal game event zero-day-leak` | Bounded network event |
-| `signal game event fbi-sweep` | Bounded network event |
-| `signal game event lockdown <5-120|stop>` | Timed event |
-| `signal game event blackout <5-120|stop>` | Timed event |
-
-Do not confuse `signal game` with DeFUNKd `signal hacked`. They are different
-protocol paths.
 
 ## Config GATT
 
@@ -452,9 +402,8 @@ value; do not treat an old sequence as the new result.
 8. Judge the request by both `ok` and `code`; an old characteristic value may
    be a replay of the previous result.
 
-For Signal Clash transaction-level tests, use 5626/5627 according to the
-transaction schema advertised in capabilities. Ordinary textual owner commands
-use 5624/5625.
+Signal Clash transactions use 5626/5627 according to the schema advertised in
+capabilities. Ordinary textual owner commands use 5624/5625.
 
 ### SIGNAL HACKED
 
@@ -483,21 +432,6 @@ These two exact commands are public and do not open ACCESS REQUEST.
 nRF Connect only writes the event request; it does not generate MIDI Clock. If
 the conductor does not already report active/running clock and nonzero BPM,
 either command returns `clock_required`.
-
-### Referee Arm And Disarm
-
-The experimental referee surface is also available over GATT:
-
-```json
-{"schema":"station562.badge.config.command.v1","seq":210,"command":"signal game arm"}
-```
-
-```json
-{"schema":"station562.badge.config.command.v1","seq":211,"command":"signal game disarm"}
-```
-
-Event injection commands are elevated and require authorization. Do not use the
-referee engine for ordinary roaming Signal Clash.
 
 ## BLE Physical Authorization
 
@@ -589,7 +523,7 @@ wargames peers
 wargames exit
 ```
 
-### Restore Normal Sensor Control After Diagnostics
+### Restore Normal Sensor Control
 
 ```text
 wg input sensor

@@ -14,7 +14,3 @@
   safe starting instructions for the optional six-stage challenge.
 - [Self-Flash Guide](../SELF_FLASH_GUIDE.md): safe V6.3.0 owner updates that
   preserve handle, career, settings, keypair, and ROOT status.
-
-Station 562 badges are distributed already flashed. The public updater supports
-owner reinstallation; manufacturing, certificate, and developer tooling remain
-separate.

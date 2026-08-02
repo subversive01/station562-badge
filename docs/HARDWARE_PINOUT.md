@@ -5,8 +5,8 @@ This is the production firmware pin assignment for the two supported Station
 numbers.
 
 This reference is included so owners can write their own independent firmware
-and use the badge hardware for other projects. The official Station 562 source
-is not required to address the OLED, sensor, or LEDs described here.
+and use the badge hardware for other projects. The GPIO and bus assignments
+below cover the OLED, sensor, and LEDs used by the badge.
 
 Custom firmware is outside the supported production release. A sketch with a
 different partition layout, whole-chip erase, factory reset, or NVS writes can

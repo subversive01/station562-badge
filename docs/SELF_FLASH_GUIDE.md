@@ -1,7 +1,7 @@
 # Station 562 Self-Flash Guide
 
 This guide installs official Station 562 firmware and the matching hardware CTF
-without requiring the Arduino IDE or firmware source.
+with the supplied updater.
 
 ## What The Normal Update Preserves
 

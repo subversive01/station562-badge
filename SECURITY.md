@@ -12,6 +12,5 @@ The updater must never:
 - accept an unknown ESP32 target;
 - bypass release hash verification.
 
-CTF play is intentionally read-only. This repository does not accept or
-publish flags, operator solutions, private authority material, or decrypted
-challenge stages.
+CTF play is intentionally read-only. Follow the safety contract in the
+[Hardware CTF Player Guide](docs/ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md).

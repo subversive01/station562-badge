@@ -41,4 +41,4 @@ Here is my current clue/output:
 
 AI should be a patient engineering partner, not a flag oracle.
 Give it only the newest clue and files the player has legitimately unlocked;
-do not preload a complete operator walkthrough.
+do not provide unrecovered clues, flags, or future-stage material.

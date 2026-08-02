@@ -23,10 +23,6 @@ Station 562 badge.
 
 **Current production release: `V6.3.0`**
 
-This repository intentionally does **not** contain firmware source, private
-keys, operator solutions, hidden puzzle answers, CTF flags, or internal
-manufacturing material.
-
 ## Start Here
 
 - [Quick Start](docs/user/STATION562_QUICK_START.md)
@@ -112,15 +108,3 @@ XIAO bundle      7fc2f5db7cb560ffbe3789f769cd161b7c57936d0778f7d2706a920c539c0da
 
 The complete image manifest is at
 [`firmware/v6.3.0/manifest.json`](firmware/v6.3.0/manifest.json).
-
-## What Is Not Here
-
-- Arduino sketch or firmware source
-- ELF, map, debug, or compilation databases
-- CTF private authority key
-- Signal Clash ROOT authority material
-- standalone CTF filesystem, flags, hint ladder, operator walkthrough, or
-  decrypted stages
-- internal provisioning and recovery utilities
-
-The source repository and authority material remain private and separate.

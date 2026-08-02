@@ -70,7 +70,7 @@ On Windows PowerShell, activate with
 
 Later stages may identify another standard tool or dependency. Install it only
 when the current recovered instructions request it. Every custom Station 562
-validator is stored on the badge; no private download is required.
+validator is recovered from the badge during play.
 
 ## Find The Badge
 

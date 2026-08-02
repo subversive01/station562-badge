@@ -5,10 +5,6 @@ V6.3.0: physical interaction, operating modes, Signal Clash, DeFUNKd, BLE MIDI,
 instrument tuning, persistence, Setup, terminal and GATT access, recovery, the
 optional hardware CTF, and known hardware limits.
 
-It does not disclose puzzle answers, CTF flags, private operator keys, or hidden
-easter-egg unlock sequences. Manufacturing and developer-only material is kept
-outside this repository.
-
 ## 1. What Station 562 Is
 
 Station 562 combines several separate systems in one badge:
@@ -100,7 +96,7 @@ The two normal OLED faces are:
 
 - **STATION 562:** station name, channel status, TX/RX activity, and moving clue
   ID.
-- **CONTROL ROOM:** an animated operator/control-room view with the same channel
+- **CONTROL ROOM:** an animated control-room view with the same channel
   and clue activity.
 
 Cover the sensor for about two seconds to switch faces, then release.
@@ -199,7 +195,7 @@ existing local visual timing and does not force a DeFUNKd state transition.
 
 Signal Clash is a first-class operating mode. It takes complete ownership of
 the game radio, OLED, LEDs, and sensor while active. It does not depend on
-DeFUNKd, a phone, a referee, or MIDI Clock.
+DeFUNKd, a phone, an external controller, or MIDI Clock.
 
 Source and protocol identifiers still use `WARGAMES` or `SIGNAL WAR` in some
 places for compatibility. The user-facing mode is **Signal Clash**.
@@ -401,8 +397,6 @@ Current REP awards:
 | Successful Firewall or Evade | 4 |
 | HANDLER assist | 4 |
 | Successful hack of an exposed H3 target | 5 |
-| Referee round win, experimental | 10 |
-| Referee match win, experimental | 25 |
 
 Capture and defense REP uses a ten-minute per-opponent anti-farm window.
 Lifetime event counters still update when repeat REP is suppressed. Unique
@@ -454,9 +448,6 @@ connected GATT exchange. It does not require a computer, phone, offline signing
 key, or matching teams. The sponsor consumes one of two lifetime sponsorship
 slots. Witnessing consumes no slot.
 
-Founder or disaster-recovery ROOT provisioning is a separate operator process
-and is not an owner workflow.
-
 ### ROOT Combat
 
 A non-ROOT player cannot capture ROOT through an ordinary single strong attack:
@@ -497,18 +488,6 @@ identity-centered standby page with subtle pixel shifting. LEDs reduce to two
 faint team-color pulses every five seconds. BLE scanning, advertising, peer
 events, attacks, forks, and the sensor remain active. A meaningful sensor or
 game event wakes the full display without consuming that gesture as an attack.
-
-### Referee Operations Boundary
-
-V6.3.0 contains an operator/referee match engine and diagnostic commands from
-development. It can stage temporary balanced teams, timed rounds, sudden death,
-and best-of-three scoring. Full release acceptance was deliberately deferred
-because multi-badge roster convergence was not as reliable as roaming play.
-
-Ordinary owners should treat roaming Signal Clash as the supported V6.3.0 game.
-Referee Operations are experimental/operator-only and must not be used as a
-production event promise. Persistent roaming teams and careers remain the
-authoritative player state.
 
 ## 8. MIDI Controller Mode
 
@@ -932,12 +911,10 @@ In MIDI Controller, every new BLE connection begins with this public surface:
 
 - standard BLE MIDI reads/writes/notifications,
 - read-only identity, capabilities, snapshot, and result characteristics,
-- exact commands `signal hacked` and `signal restored`,
-- the bounded `signal game` referee control surface.
+- exact commands `signal hacked` and `signal restored`.
 
 The two signal commands require a valid, running clock. They emit bounded
 Station 562 events and do not expose the serial parser or arbitrary commands.
-The referee surface is experimental and intended for controlled operator use.
 
 Every accepted `midi ...` or `perf ...` configuration mutation is privileged.
 The first privileged write returns `physical_confirmation_required` and opens
@@ -1025,9 +1002,8 @@ or checking its `ok=`/`error=` response.
 | `perf status` | Modifier levels, fixed presets, and five user slots |
 | `perf user status` | Alias for the performance/user-slot status |
 | `sleep status` | Sleep state, blockers, swipe timing, and heartbeat settings |
-| `signal status` | Clock, prompt, Party, invitation, and restoration diagnostics |
-| `signal animation-info status` | Whether the party debug overlay is visible |
-| `wargames status` | Signal Clash mode, input, peer, event, and visual diagnostics |
+| `signal status` | Clock, prompt, Party, invitation, and restoration state |
+| `wargames status` | Signal Clash mode, input, peer, event, and visual state |
 | `wargames stats` | Complete persistent career and current match counters |
 | `wargames peers` | Currently visible Signal Clash peers and radio evidence |
 | `wg whoami` | Handle, badge ID, rank, certificate, and key fingerprint |
@@ -1152,7 +1128,7 @@ Other commands:
 | `midi settings save` | Save the complete active MIDI configuration as startup default |
 | `midi settings reset confirm` | Clear the entire MIDI namespace, scenes, and user modifier slots |
 
-### Sleep And SIGNAL Control/Diagnostics
+### Sleep And SIGNAL Control
 
 | Command | Effect |
 | --- | --- |
@@ -1160,18 +1136,12 @@ Other commands:
 | `sleep exit` | Wake from software sleep |
 | `signal hacked` | From a clocked MIDI conductor, emit the five-second invitation event |
 | `signal restored` | From the same clocked conductor, emit the five-second restoration event |
-| `signal prompt` | Diagnostic: force the prompt; requires DeFUNKd |
-| `signal enter` | Diagnostic: force active party visuals; requires DeFUNKd |
-| `signal exit` | Exit the overlay/party visual path |
-| `signal animation-info on` | Show party animation debug text |
-| `signal animation-info off` | Hide party animation debug text; production default |
 
 `signal hacked` and `signal restored` use the production over-air event path;
 the same exact command strings are the only public DeFUNKd Signal Party
 commands exposed through Config GATT.
-`signal prompt`, `signal enter`, and `signal exit` bypass portions of that path
-and are USB-only troubleshooting hooks. Normal Party entry still requires a
-real invitation event followed by the follower's physical double swipe.
+Normal Party entry requires a real invitation event followed by the follower's
+physical double swipe.
 
 Conductor result codes are:
 
@@ -1182,7 +1152,7 @@ Conductor result codes are:
 
 #### Triggering SIGNAL HACKED And SIGNAL RESTORED
 
-USB/operator procedure:
+USB procedure:
 
 1. Put the conductor badge in MIDI Controller Mode.
 2. Connect `S562_MIDI` to a MIDI host and enable Clock Out.
@@ -1253,33 +1223,29 @@ though the screen says Signal Clash.
 | --- | --- |
 | `wargames enter` or `wg enter` | Enter Signal Clash from USB |
 | `wargames exit` or `wg exit` | Exit Signal Clash |
-| `wargames status` or `wg status` | Detailed runtime diagnostics |
+| `wargames status` or `wg status` | Detailed runtime state |
 | `wargames stats` or `wg stats` | Complete career and match counters |
 | `wargames peers` | Visible peer table |
-| `wargames attack` or `wg act` | Trigger the terminal combat intent when terminal input is enabled |
-| `wargames join` | Accept a staged referee invitation |
 | `wargames team <auto|red|blue>` | Set team preference |
-| `wg input <sensor|terminal|auto>` | Select the Signal Clash input source |
+| `wg input <sensor|auto>` | Restore physical or automatic Signal Clash input |
 | `wg whoami` | Print identity and certificate summary |
 | `wg handle get` or `wg identity status` | Read handle or identity state |
 | `wg choose <breaker|ghost|cipher|handler>` | Select an unlocked discipline |
 | `wg handle set NAME` | Set the handle through the elevated path |
 | `wg handle randomize` | Generate another automatic handle through the elevated path |
 | `wg ceremony status` | Current ROOT ceremony state |
-| `wg ceremony log` | Ceremony diagnostics |
+| `wg ceremony log` | Ceremony event log |
 | `wg ceremony abort` | Abort the local ceremony role |
 
-`wg input terminal` and forced visual/ceremony commands are developer
-diagnostics. Restore `wg input sensor` or `wg input auto` before normal play.
 The complete production command catalog and Config GATT forms are in
 [Terminal And BLE Command Reference](STATION562_TERMINAL_AND_BLE_REFERENCE.md).
 
 ### Signal Clash Career And Disciplines
 
 Signal Clash celebrates automatic rank promotion, five and ten unique captured
-badges, ROOT induction eligibility, successful ROOT induction, and referee match
-victory. Career celebrations last about 2.5-4 seconds and use the current team
-color. Combat, defense, exit, and authorization prompts always interrupt them.
+badges, ROOT induction eligibility, and successful ROOT induction. Career
+celebrations last about 2.5-4 seconds and use the current team color. Combat,
+defense, exit, and authorization prompts always interrupt them.
 If one capture unlocks several milestones, only the highest-value result is
 shown: ROOT inducted, ROOT eligible, rank up, ten unique, then five unique.
 
@@ -1290,12 +1256,8 @@ persona; changing it requires **BURN HANDLE / FACTORY RESET**.
 | --- | --- |
 | BREAKER | Adds 6 percentage points to compromise probability |
 | GHOST | Has approximately 6% automatic evade protection; Heat cools every 9 seconds instead of 15 |
-| CIPHER | Regenerates one roaming PATCH after 90 seconds without one; receives one temporary PATCH at the start of each referee round |
+| CIPHER | Regenerates one roaming PATCH after 90 seconds without one |
 | HANDLER | Nearby teammates gain a 6-point attack bonus; a confirmed supported capture earns the Handler one assist and 4 REP |
-
-The CIPHER referee PATCH exists only in RAM for that round. It is consumed by
-one otherwise successful attack, disappears at round end, and never changes the
-badge's persistent PATCH inventory.
 
 USB reference commands:
 
@@ -1335,8 +1297,6 @@ include:
 - `restore`: active flag, current event token, and event age in milliseconds.
 - `preset`: active MIDI preset name.
 - `tune`: active flag, step, point count, far captured, and close captured.
-- `war`: referee state, token, roster, team assignment, and score summary.
-- `event`: current bounded operator event type and remaining state.
 - `audition`: 1 while the built-in phrase is active.
 - `dirty`: 1 means active MIDI configuration has unsaved changes.
 
@@ -1447,9 +1407,9 @@ save`, a scene save, or a user modifier save at the appropriate scope.
 
 ## 19. Optional Hardware CTF
 
-V6.3.0 contains a six-stage, read-only hardware-hacking challenge. Its stage
-order, evidence types, hidden commands, and validation path are intentionally
-not summarized in this owner manual.
+V6.3.0 contains a six-stage, read-only hardware-hacking challenge. Begin with
+the [Hardware CTF Player Guide](../ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md)
+and follow each recovered transmission in order.
 
 The CTF is designed so:
 
@@ -1461,9 +1421,8 @@ The CTF is designed so:
   necessary;
 - no stage requires writing or erasing badge flash.
 
-Do not guess destructive `esptool` commands. Begin with the
-[Hardware CTF Player Guide](../ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md).
-The guide provides prerequisites and safety rules without publishing flags.
+Do not guess destructive `esptool` commands. The player guide provides the
+required prerequisites and safety rules.
 
 Burn Handle does not erase the CTF archive. A full-chip erase does.
 
@@ -1480,8 +1439,6 @@ Burn Handle does not erase the CTF archive. A full-chip erase does.
   tuning surface.
 - USB and Config GATT command text is limited to 127 characters; use the
   documented compact forms.
-- Referee best-of-three Operations remain experimental/operator-only; roaming
-  Signal Clash is the supported game.
 - RSSI-based target qualification is affected by bodies, cases, walls,
   orientation, and crowded-room radio traffic.
 - Large-room DeFUNKd and Signal Clash convergence is best-effort rather than an
@@ -1491,7 +1448,7 @@ Burn Handle does not erase the CTF archive. A full-chip erase does.
 - The shared firmware does not report battery percentage, voltage, or estimated
   time remaining on the OLED or terminal.
 
-## 21. Owner/Operator Recovery Appendix
+## 21. Owner Recovery
 
 ### DEFUNKT562 Service Exit
 
@@ -1509,13 +1466,6 @@ must recover a badge from DEFUNKT562 calibration, blackout, or alert.
 A failed or timed-out attempt does not exit the mode. Start again from the
 20-second hold.
 
-### Hidden Puzzle/Easter-Egg Content
-
-V6.3.0 contains hidden puzzle/easter-egg content. Its exact unlock sequence is
-intentionally omitted so the discovery experience is not spoiled. Maintainers
-can use separately controlled internal validation material when recovery or
-event support requires it.
-
 ## 22. Firmware And Support References
 
 - Current firmware: `V6.3.0`
@@ -1527,5 +1477,4 @@ event support requires it.
   `docs/ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md`
 
 Production badges are delivered flashed and functional. Owners can reinstall
-the official binary bundle with the public updater; source compilation remains
-a maintainer operation.
+the official V6.3.0 bundle with the self-flash updater.

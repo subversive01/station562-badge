@@ -148,7 +148,7 @@ A Station 562 badge in MIDI Controller Mode can receive MIDI Clock and
 broadcast its beat to nearby DeFUNKd badges. Clock alone only synchronizes the
 existing OLED and LED animations.
 
-An operator may deliberately transmit **SIGNAL HACKED**. Eligible followers
+The MIDI conductor may deliberately transmit **SIGNAL HACKED**. Eligible followers
 show **SIGNAL HACKED / CURIOUS?**:
 
 - double swipe to accept the synchronized party experience;
@@ -157,7 +157,7 @@ show **SIGNAL HACKED / CURIOUS?**:
 The same conductor can send **SIGNAL RESTORED** to return accepted followers to
 DeFUNKd SOLO while the clock continues.
 
-### Operator: Trigger The Party With nRF Connect
+### Trigger The Party With nRF Connect
 
 nRF Connect can send the event command, but it does **not** create MIDI Clock.
 Before using nRF Connect, the conductor badge must already be in MIDI
