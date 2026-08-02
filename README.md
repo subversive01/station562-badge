@@ -22,6 +22,7 @@ Station 562 badge.
 ## Start Here
 
 - [Quick Start](docs/user/STATION562_QUICK_START.md)
+- [Signal Clash Player Guide](docs/user/STATION562_SIGNAL_CLASH.md)
 - [Advanced Owner Guide](docs/user/STATION562_ADVANCED_OWNER_GUIDE.md)
 - [Terminal and BLE Reference](docs/user/STATION562_TERMINAL_AND_BLE_REFERENCE.md)
 - [Troubleshooting FAQ](docs/user/STATION562_TROUBLESHOOTING.md)

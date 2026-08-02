@@ -197,6 +197,9 @@ Signal Clash is a first-class operating mode. It takes complete ownership of
 the game radio, OLED, LEDs, and sensor while active. It does not depend on
 DeFUNKd, a phone, an external controller, or MIDI Clock.
 
+For a player-first introduction and a dedicated game reference, see the
+[Signal Clash Player Guide](STATION562_SIGNAL_CLASH.md).
+
 Source and protocol identifiers still use `WARGAMES` or `SIGNAL WAR` in some
 places for compatibility. The user-facing mode is **Signal Clash**.
 

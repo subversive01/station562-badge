@@ -2,6 +2,9 @@
 
 - [Quick Start](STATION562_QUICK_START.md): plain-language mode definitions,
   physical controls, everyday use, and nRF Connect Signal Party examples.
+- [Signal Clash Player Guide](STATION562_SIGNAL_CLASH.md): game introduction,
+  first-play instructions, attacks, defenses, teams, disciplines, progression,
+  ROOT induction, and owner commands.
 - [Advanced Owner Guide](STATION562_ADVANCED_OWNER_GUIDE.md): complete mode,
   Signal Clash, MIDI, BLE, terminal, persistence, recovery, and troubleshooting
   reference.

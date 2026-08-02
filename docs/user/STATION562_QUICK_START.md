@@ -70,6 +70,10 @@ If a confirmation appears by mistake, move your hand away and let it time out.
 Signal Clash is the persistent red-versus-blue roaming game. Enter at the
 four-second hold cue and double swipe when asked.
 
+The dedicated [Signal Clash Player Guide](STATION562_SIGNAL_CLASH.md) starts
+with a complete first-play path, followed by combat, career, discipline, ROOT,
+and owner-command details.
+
 On first entry, the badge creates a persistent player identity, automatic
 hacker handle, signing keypair, and initial team. That career survives reboots
 and ordinary firmware updates.
