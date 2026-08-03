@@ -71,6 +71,59 @@ class ReleaseTests(unittest.TestCase):
             with self.assertRaises(FLASHER.UpdateError):
                 FLASHER.detect_target("TEST_PORT", self.manifest)
 
+    def test_target_detection_uses_version_appropriate_cli(self):
+        result = mock.Mock(returncode=0, stdout="Chip type: ESP32-C3", stderr="")
+        for major, operation in ((4, "chip_id"), (5, "chip-id")):
+            with self.subTest(esptool_major=major):
+                with mock.patch.object(
+                    FLASHER, "run_esptool", return_value=result
+                ) as run_esptool:
+                    FLASHER.detect_target("TEST_PORT", self.manifest, major)
+                self.assertIn(operation, run_esptool.call_args.args[0])
+
+    def test_detects_supported_esptool_versions(self):
+        for output, expected in (
+            ("esptool.py v4.12.0", 4),
+            ("esptool v5.2.0", 5),
+        ):
+            with self.subTest(output=output):
+                result = mock.Mock(returncode=0, stdout=output, stderr="")
+                with mock.patch.object(FLASHER, "run_esptool", return_value=result):
+                    self.assertEqual(FLASHER.ensure_esptool(), expected)
+
+    def test_rejects_unknown_esptool_version(self):
+        result = mock.Mock(returncode=0, stdout="esptool v6.0.0", stderr="")
+        with mock.patch.object(FLASHER, "run_esptool", return_value=result):
+            with self.assertRaises(FLASHER.UpdateError):
+                FLASHER.ensure_esptool()
+
+    def test_flash_uses_version_appropriate_cli(self):
+        cases = (
+            (
+                4,
+                ("write_flash", "--flash_mode", "--flash_freq", "--flash_size"),
+                "verify_flash",
+            ),
+            (
+                5,
+                ("write-flash", "--flash-mode", "--flash-freq", "--flash-size"),
+                "verify-flash",
+            ),
+        )
+        for major, write_tokens, verify_operation in cases:
+            with self.subTest(esptool_major=major):
+                result = mock.Mock(returncode=0, stdout="", stderr="")
+                with mock.patch.object(
+                    FLASHER, "run_esptool", return_value=result
+                ) as run_esptool:
+                    FLASHER.flash("TEST_PORT", self.manifest, "codecell", major)
+
+                write_args = run_esptool.call_args_list[0].args[0]
+                verify_args = run_esptool.call_args_list[1].args[0]
+                for token in write_tokens:
+                    self.assertIn(token, write_args)
+                self.assertIn(verify_operation, verify_args)
+
 
 if __name__ == "__main__":
     unittest.main()

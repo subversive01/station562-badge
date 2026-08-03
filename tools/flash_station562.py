@@ -7,6 +7,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 import subprocess
 import sys
 from typing import Any
@@ -71,13 +72,27 @@ def run_esptool(arguments: list[str], *, capture: bool = False) -> subprocess.Co
         raise UpdateError("Python could not start esptool") from error
 
 
-def ensure_esptool() -> None:
+def ensure_esptool() -> int:
     result = run_esptool(["version"], capture=True)
     if result.returncode != 0:
         raise UpdateError(
             "esptool is unavailable; activate the virtual environment and run "
             "'python -m pip install -r requirements.txt'"
         )
+
+    output = (result.stdout or "") + (result.stderr or "")
+    match = re.search(
+        r"\besptool(?:\.py)?\s+v?(\d+)(?:\.\d+)", output, re.IGNORECASE
+    )
+    if not match:
+        raise UpdateError("could not determine the installed esptool version")
+
+    major = int(match.group(1))
+    if major not in (4, 5):
+        raise UpdateError(
+            f"unsupported esptool major version {major}; install requirements.txt"
+        )
+    return major
 
 
 def list_ports() -> int:
@@ -99,9 +114,11 @@ def list_ports() -> int:
     return 0
 
 
-def detect_target(port: str, manifest: dict[str, Any]) -> str:
-    # Underscore operation names work on esptool 4.x and remain aliases in 5.x.
-    result = run_esptool(["--port", port, "chip_id"], capture=True)
+def detect_target(
+    port: str, manifest: dict[str, Any], esptool_major: int = 4
+) -> str:
+    operation = "chip-id" if esptool_major >= 5 else "chip_id"
+    result = run_esptool(["--port", port, operation], capture=True)
     output = (result.stdout or "") + (result.stderr or "")
     if result.returncode != 0:
         raise UpdateError(f"could not connect to {port}:\n{output.strip()}")
@@ -137,17 +154,23 @@ def show_plan(port: str, manifest: dict[str, Any], target_name: str) -> None:
     print()
 
 
-def flash(port: str, manifest: dict[str, Any], target_name: str) -> None:
+def flash(
+    port: str,
+    manifest: dict[str, Any],
+    target_name: str,
+    esptool_major: int,
+) -> None:
     parts = update_parts(manifest, target_name)
+    modern_cli = esptool_major >= 5
     arguments = [
         "--port",
         port,
-        "write_flash",
-        "--flash-mode",
+        "write-flash" if modern_cli else "write_flash",
+        "--flash-mode" if modern_cli else "--flash_mode",
         manifest["flash_mode"],
-        "--flash-freq",
+        "--flash-freq" if modern_cli else "--flash_freq",
         manifest["flash_frequency"],
-        "--flash-size",
+        "--flash-size" if modern_cli else "--flash_size",
         manifest["flash_size"],
     ]
     for part in parts:
@@ -159,8 +182,9 @@ def flash(port: str, manifest: dict[str, Any], target_name: str) -> None:
 
     part = parts[0]
     print("Verifying installed update bundle...")
+    verify_operation = "verify-flash" if modern_cli else "verify_flash"
     result = run_esptool(
-        ["--port", port, "verify_flash", part["offset"], str(image_path(part))]
+        ["--port", port, verify_operation, part["offset"], str(image_path(part))]
     )
     if result.returncode != 0:
         raise UpdateError("post-write verification failed")
@@ -188,8 +212,8 @@ def main() -> int:
         manifest = load_manifest()
         print(f"Verifying bundled {manifest['version']} release files...")
         verify_release(manifest)
-        ensure_esptool()
-        target_name = detect_target(args.port, manifest)
+        esptool_major = ensure_esptool()
+        target_name = detect_target(args.port, manifest, esptool_major)
         show_plan(args.port, manifest, target_name)
 
         if args.dry_run:
@@ -202,7 +226,7 @@ def main() -> int:
                 print("Cancelled. Nothing was written.")
                 return 1
 
-        flash(args.port, manifest, target_name)
+        flash(args.port, manifest, target_name, esptool_major)
         print()
         print(f"SUCCESS: Station 562 {manifest['version']} and its CTF are installed.")
         print("Owner NVS was not erased. Reconnect at 115200 baud and run: version")
