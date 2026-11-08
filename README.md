@@ -30,7 +30,7 @@ Station 562 badge.
 - [Self-Flash Guide](docs/SELF_FLASH_GUIDE.md)
 - [Hardware CTF Player Guide](docs/ctf/STATION562_HARDWARE_CTF_PLAYER_GUIDE.md)
 - [AI-Assisted CTF Play](docs/ctf/STATION562_HARDWARE_CTF_AI_PLAY.md)
-- [DC562 !CON: Building Station 562](docs/presentations/DC562-ICON-Station562-presentation.html)
+- [DC562 !CON: Building Station 562 presentation](https://sbhcsecurity.com/station562-badge/presentations/DC562-ICON-Station562-presentation.html)
 - [V6.3.0 Release Notes](docs/firmware/V6.3.0_RELEASE_NOTES.md)
 
 ## Compatible Badges
